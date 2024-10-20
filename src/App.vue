@@ -1,130 +1,242 @@
 <router-link class="" to="/"></router-link> 
 <router-view/>
-<template>
-  <div class="bg-gray-400 h-full" >
-    <nav class=" bg-white p-2 max-w-[1200px] sm mx-auto rounded-xl shadow-lg flex flex-row">
-      <i class="fa-solid fa-magnifying-glass text-xl xl:pt-1 md:pt-0"></i>
-      <input type="text" class="pl-3 placeholder:text-xl placeholder:text-black xl:w-[75px] md:h-4 xl:h-8 border-none" placeholder="Search....." >
-      <div class="text-right space-x-4 text-2xl md:pl-[500px] xl:pl-[900px] md:flex md:flex-row" >     
-      <i class="fa-regular fa-address-book text-orange-400"></i>
-      <i class="fa-solid fa-angle-down text-black"></i>
-      <i class="fa-solid fa-road-lock text-orange-400"></i>
-    </div>
-    </nav>
-    <div class=" text-white">
-    <div class=" text-xl text-orange-600 pt-5 md:pl-20 pl-36 flex flex-row gap-8 md:gap-[300px] xl:gap-[1000px]">
-      <h1 class="bg-white w-32 pl-2 h-9 flex items-center rounded-xl  hover:bg-orange-700 hover:text-white hover:animate-bounce" >Prickles&co.</h1>
-      <h1 class="bg-white w-64 h-9 flex items-center rounded-xl hover:bg-orange-700 hover:text-white pl-2 hover:animate-bounce" >Contact Us: 08137628419</h1>
-    </div>
-  <div>
-    <nav class="p-4">
-      <div class="flex justify-start space-x-8 pl-2">
-        <button
-          v-for="(tab, index) in tabs"
-          :key="index"
-          :class="{
-            'text-white border-b-2 border-orange-300': activeTab === index,
-            'text-orange-300': activeTab !== index
-          }"
-          class="text-lg font-bold pb-2 transition duration-300"
-          @click="setActiveTab(index)"
-        >
-          {{ tab }}
+  <template>
+    <nav class="bg-gray-800 p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        //logo
+        <a href="#" 
+        class="text-green-500 text-lg md:text2xl font-semibold">SpiceCraft</a>
+        <button @click="toggleMenu" class="text-gray-400"> 
+          <i class="bi bi-list text-2xl"></i>
         </button>
       </div>
     </nav>
 
-    <div class="m-8">
-      <div v-if="activeTab === 0">
-        <img src="./assets/prickles.png" class="w-full max-w-full h-[600px] rounded-lg ml-5 relative object-cover">
-        <div class="absolute inset-0 pointer-events-none flex items-center justify-center text-white flex-col ">
-          <i class="fa-brands fa-envira text-white text-8xl md:flex md:justify-center xl:text-7xl md:text-5xl md:mt-32 sm:mt-40"></i>
-          <h1 class="text-7xl md:text-3xl mt-3" >   Prickles  &  co.</h1>
-          <h1 class="text-4xl mt-3" >BRING NATURE INDOORS</h1>
-          <button class="bg-orange-800 text-2xl h-11 w-48 rounded-lg  mt-9">Shop now</button>
-  </div>
-  <div class="mt-8 flex flex-row gap-10">
-    <nav class="bg-white text-black w-[500px] h-32 ml-20 rounded-lg  hover:scale-95 hover:rotate-1">
-      <h1 class="text-3xl text-orange-500 flex justify-center font-bold mt-4">Cacti</h1>
-      <h1 class="text-2xl text-orange-500 flex justify-center font-bold mt-1"><i class="fa-solid fa-clover"></i></h1>
-      <h1 class="text-3xl text-orange-500 flex justify-center font-bold mt-1">shop collection</h1>
-     
-    </nav>
-    <nav class="bg-white text-black w-[500px] h-32 rounded-lg  hover:scale-95 hover:rotate-1 ">
-      <h1 class="text-3xl text-orange-500 flex justify-center font-bold mt-4">Plants</h1>
-      <h1 class="text-2xl text-orange-500 flex justify-center font-bold mt-1"><i class="fa-solid fa-clover"></i></h1>
-      <h1 class="text-3xl text-orange-500 flex justify-center font-bold mt-1" >shop collection</h1>
-    </nav>
-    <nav class="bg-white text-black w-[500px] h-32 rounded-lg  hover:scale-95 hover:rotate-1">
-      <h1 class="text-3xl text-orange-500 flex justify-center font-bold mt-4">Succulent</h1>
-      <h1 class="text-2xl text-orange-500 flex justify-center font-bold mt-1"><i class="fa-solid fa-clover"></i></h1>
-      <h1 class="text-3xl text-orange-500 flex justify-center font-bold mt-1">shop collection</h1>
-    </nav>
-  </div>
+    <div :class="menuOpen ? 'translate-x-0' : 'translate-x-full'" class="fixed top-0 right-0 w-2/3 md:w-1/4 h-full bg-gray-900 text-white transition-transform transform z-50" >
+      <div class="p-4 flex justify-between items-center">
+        <span class="text-green-500 text-lg font-semibold md:text-2xl"> SpiceCraft</span>
+        <button @click="toggleMenu" class="text-gray-400"> 
+          <i class="bi bi-x text-2xl"></i>
+        </button>
       </div>
-      <div v-else-if="activeTab === 1">
-        <div class="xl:grid xl:grid-cols-3 md:grid md:grid-cols-1 md:gap-3" >
-          <img src="./assets/prickles2.png" class="block h-[600px] w-[564px] hover:scale-95 hover:animate-pulse rounded-lg ">
-          <img src="./assets/prickles3.png" class="block h-[600px] w-[564px] hover:scale-95 hover:animate-pulse rounded-lg ">
-          <img src="./assets/prickles4.png" class="block h-[600px] w-[564px] hover:scale-95 hover:animate-pulse rounded-lg ">
-          <img src="./assets/prickles5.png" class="block h-[600px] w-[564px] hover:scale-95 hover:animate-pulse rounded-lg ">
-          <img src="./assets/prickles6.png" class="block h-[600px] w-[564px] hover:scale-95 hover:animate-pulse rounded-lg ">
-          <img src="./assets/prickles7.png" class="block h-[600px] w-[564px] hover:scale-95 hover:animate-pulse rounded-lg ">
-          <img src="./assets/prickles8.png" class="block h-[600px] w-[564px] hover:scale-95 hover:animate-pulse rounded-lg ">
-          <img src="./assets/prickles9.png" class="block h-[600px] w-[564px] hover:scale-95 hover:animate-pulse rounded-lg ">
-        </div>
+      <ul class="p-4 space-y-4">
+        <li><a href="#"
+          class="text-gray-300" hover:text-white >About</a>
+        </li>
+        <li><a href="#"
+          class="text-gray-300" hover:text-white >Menu</a>
+        </li>
+        <li><a href="#"
+          class="text-gray-300" hover:text-white >Why Choose Us</a>
+        </li>
+        <li><a href="#"
+          class="text-gray-300" hover:text-white >Contact</a>
+        </li>
+      </ul>
+    </div>
+    <div v-if="menuOpen" @click="toggleMenu" class="fixed inset-0 bg-black opacity-50 z-40">
+    </div>
+
+    <div id="carouselExampleDark" class="carousel carousel-dark slide">
+  <div class="carousel-inner">
+  <div class="carousel-item active" data-bs-interval="10000">
+    <img src="https://i.pinimg.com/enabled_lo/564x/84/2d/03/842d03e68c671aa86ad7a3ec54b1f2b4.jpg" class="d-block w-full h-[600px] md:h-[800px]">
+    <div class="carousel-caption absolute inset-0 flex items-center justify-center text-white">
+      <div class="text-center">
+        <h5 class="text-4xl md:text-7xl font-bold text-green-500 ">Delicious meals</h5>
+        <p class="text-2xl md:text-4xl font-bold mt-4">Savour every bite with us.</p>
+        <button class="bg-green-700 h-12 md:h-20 w-40 md:w-72 md:text-4xl font-bold rounded-2xl mt-4 text-black">BOOK A TABLE.</button>
       </div>
-      <div v-else-if="activeTab === 2">
-        <div class="flex flex-col gap-5" >
-        <h1 class="text-xl text-orange-300 font-bold">Input your name</h1>  <input type="text" placeholder="Name......" class="w-60 h-11 rounded-lg placeholder-black">
-        <h1 class="text-xl text-orange-300 font-bold">Email</h1>  <input type="text" placeholder="email......" class="w-60 h-11 rounded-lg placeholder-black">
-        <h1 class="text-xl text-orange-300 font-bold">Desciption</h1>  <input type="text" class="w-72 h-40 rounded-lg">
-        </div>
-        <h1 class="mt-96"><i class="fa-regular fa-copyright"></i> Copyright</h1>
-      </div>
-      <i class="fa-regular fa-copyright"></i>
     </div>
   </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="2000">
+      <img src="https://i.pinimg.com/enabled_lo/564x/c8/a7/c3/c8a7c3a22a8f1e23c11bfe498146f2d6.jpg" class="d-block w-full h-[600px] md:h-[800px]">
+      <div class="carousel-caption absolute inset-0 flex items-center justify-center text-white">
+        <div class="text-center">
+          <h5 class="text-4xl md:text-7xl font-bold text-green-400 ">Fresh ingredients</h5>
+        <p class="text-2xl md:text-4xl font-bold mt-4">Hand picked just for you.</p>
+        <button class="bg-green-700 h-12 md:h-20 w-40 md:w-72 md:text-4xl font-bold rounded-2xl mt-4 text-black">OUR MENU</button>
+      </div>
+      </div>
+    </div>
   </div>
+  <div class="carousel-inner">
+    <div class="carousel-item absolute inset-0 flex items-center justify-center text-white">
+      <img src="https://i.pinimg.com/enabled_lo/564x/8c/28/54/8c28544c2466ca9df00d0e57dd8bba78.jpg" class="d-block w-full h-[600px] md:h-[800px]">
+      <div class="carousel-caption absolute inset-0 flex items-center justify-center text-white">
+        <div class="text-center">
+          <h5 class="text-4xl md:text-7xl font-bold text-green-500 ">Cozy Atmosphere </h5>
+        <p class="text-2xl md:text-4xl font-bold mt-4">Experience comfort and taste.</p>
+        <button class="bg-green-700 h-12 md:h-20 w-40 md:w-60 md:text-4xl font-bold rounded-2xl mt-4 text-black">RESREVE NOW</button>
+      </div>
+      </div>
+    </div>
   </div>
-</template>
+</div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+    <span class="carousel-control-next-icon bg-black" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="container flex flex-col bg-white h-[950px] md:h-[900px] ">
+      <h1 class="mt-10 text-green-500 text-3xl md:text-5xl flex justify-center">About Us</h1>
+      <h1 class="text-black text-lg md:text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consectetur eum quidem corporis, vel suscipit voluptatem ex ut explicabo, autem recusandae dolorum! Quisquam, eligendi ullam minus consectetur voluptatem perspiciatis aperiam!</h1>
+      <h1 class="text-black text-lg md:text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consectetur eum quidem corporis, vel suscipit voluptatem ex ut explicabo, autem recusandae dolorum! Quisquam, eligendi ullam minus consectetur voluptatem perspiciatis aperiam!</h1>
+      <h1 class="text-black text-lg md:text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consectetur eum quidem corporis, vel suscipit voluptatem ex ut explicabo, autem recusandae dolorum! Quisquam, eligendi ullam minus consectetur voluptatem perspiciatis aperiam!</h1>
+    <div class="flex justify-center items-center mt-5">
+      <transition appear>
+        <img src="https://i.pinimg.com/enabled_lo/564x/41/ca/e0/41cae02db6df0c408299a2017fa0bd41.jpg" alt="Rotating image"
+        class="w-40 h-40 md:w-96 md:h-96 animate-spin-custom rounded-full "/>
+      </transition>
+    </div>
+  </div>
+
+    <div class="bg-gray-200">
+      <div class="h-[2500px] md:h-[950px]">
+      <h1 class="pt-20 flex justify-center text-green-600 md:text-5xl" >Our Menu</h1>
+      <div class="md:grid md:grid-cols-3 px-8 ml-9 grid grid-cols-1">
+        <div data-aos="flip-left">
+        <div class=".container bg-white w-72 h-80 mt-11 rounded-lg shadow-2xl hover:shadow-green-300 flex items-center flex-col justify-center px-4">
+          <i class="bi bi-cup-hot text-green-400 text-7xl"></i>
+          <h1 class="text-3xl text-green-400 font-bold">Hot Beverages</h1>
+          <h1 class="text-2xl md:font-medium font-bold text-black">Explore a wide variety of  drinks to give keep you refreshed</h1>
+          </div>
+        </div>
+        <div data-aos="flip-left">
+        <div class=".container bg-white w-72 h-80 mt-11 rounded-lg shadow-2xl hover:shadow-green-300 flex items-center flex-col justify-center px-4">
+          <i class="bi bi-egg-fried text-green-400 text-7xl"></i>
+          <h1 class="text-3xl text-green-400 font-bold">Breakfast Special</h1>
+          <h1 class="text-2xl md:font-medium font-bold text-black"> freshly made meals to start your day right. </h1>
+        </div>
+        </div>
+        <div data-aos="flip-left">
+        <div class=".container bg-white w-72 h-80 mt-11 rounded-lg shadow-2xl hover:shadow-green-300 flex items-center flex-col justify-center px-4">
+          <i class="bi bi-basket text-green-400 text-7xl"></i>
+          <h1 class="text-3xl text-green-400 font-bold">Appetizers</h1>
+          <h1 class="text-2xl md:font-medium font-bold text-black"> Delicious starters to tantalise your taste buds. </h1>
+        </div>
+        </div>
+        <div data-aos="flip-left">
+        <div class=".container bg-white w-72 h-80 mt-11 rounded-lg shadow-2xl hover:shadow-green-300 flex items-center flex-col justify-center px-4">
+          <i class="bi bi-check-circle-fill text-green-400 text-7xl"></i>
+          <h1 class="text-3xl text-green-400 font-bold">Signature Dishes</h1>
+          <h1 class="text-2xl md:font-medium font-bold text-black"> Our chefs special creations that define our cursine. </h1>
+        </div>
+        </div>
+        <div data-aos="flip-left">
+        <div class=".container bg-white w-72 h-80 mt-11 rounded-lg shadow-2xl hover:shadow-green-300 flex items-center flex-col justify-center px-4">
+          <i class="bi bi-cup-straw text-green-400 text-7xl"></i>
+          <h1 class="text-3xl text-green-400 font-bold">Refreshing Drinks</h1>
+          <h1 class="text-2xl md:font-medium font-bold text-black"> Quench your thirst with our unique beverage selection. </h1>
+        </div>
+        </div>
+        <div data-aos="flip-left">
+        <div class=".container bg-white w-72 h-80 mt-11 rounded-lg shadow-2xl hover:shadow-green-300 flex items-center flex-col justify-center px-4">
+          <i class="bi bi-egg text-green-400 text-7xl"></i>
+          <h1 class="text-3xl text-green-400 font-bold">Desserts</h1>
+          <h1 class="text-2xl md:font-medium font-bold text-black"> Indulge in our sweet treats to end your meal on a high note. </h1>
+        </div>
+        </div>   
+        </div>   
+      </div>
+
+      <div class="bg-white h-[1300px] md:h-[600px]">
+        <div data-aos="zoom-in">
+        <h1 class="pt-11 flex justify-center text-green-400 text-3xl md:text-6xl font-bold" >Why Choose Us</h1>
+      </div>
+      <div class="md:grid md:grid-cols-3 grid grid-cols-1 px-8" >
+      <div data-aos="zoom-in">
+        <div class=".container bg-gray-100 w-72 md:w-80 h-80 mt-11 rounded-lg shadow-2xl hover:border-green-300 hover:border-4  flex items-center flex-col justify-center px-2">
+          <h1 class="text-3xl text-green-400 font-bold">Quality Ingedients</h1>
+          <h1 class="text-2xl md:font-medium font-bold text-black px-4"> Only the best ingredients, sourced daily. </h1>
+        </div>
+        </div>
+      <div data-aos="zoom-in">
+        <div class=".container bg-gray-100 w-72 md:w-80 h-80 mt-11 rounded-lg shadow-2xl hover:border-green-300 hover:border-4  flex items-center flex-col justify-center px-2">
+          <h1 class="text-3xl text-green-400 font-bold">Friendly Service</h1>
+          <h1 class="text-2xl md:font-medium font-bold text-black px-4"> Our staff is here to make your dining experince unforgettable. </h1>
+        </div>
+        </div>
+      <div data-aos="zoom-in">
+        <div class=".container bg-gray-100 w-72 md:w-80 h-80 mt-11 rounded-lg shadow-2xl hover:border-green-300 hover:border-4  flex items-center flex-col justify-center px-2">
+          <h1 class="text-3xl text-green-400 font-bold"> Cozy Ambience</h1>
+          <h1 class="text-2xl md:font-medium font-bold text-black px-4">Enjoy your meal in a relaxing and welcoming environment. </h1>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div data-aos="zoom-in">
+    <div class=" h-[600px] md:h-[800px] bg-orange-200 flex justify-center items-center w-full" >
+    <div class="w-[350px] h-[500px] md:w-[700px] md:h-[700px] bg-white shadow-lg" >
+      <h1 class="text-green-400 text-3xl md:text-5xl flex justify-center font-bold mt-5">Contact Us</h1>
+      <h1 class="flex justify-center text-sm md:text-2xl font-bold px-2">Feel free to reach out to us for reservations or queries.</h1>
+      <div class="mt-10 ml-6 ">
+      <input type="name" placeholder="Your Name" class=" border-2 border-gray-400 w-[300px] md:w-[550px] h-11 md:h-20   placeholder:text-black text-lg md:text-2xl pl-8 ">
+      <input type="email" placeholder="Your Email" class="  border-2 border-gray-400 mt-3 w-[300px] md:w-[550px] h-11 md:h-20   placeholder:text-black text-lg md:text-2xl pl-8">
+      <input type="message" placeholder="Your Message" class="  border-2 border-gray-400 mt-3 w-[300px] md:w-[550px] h-11 md:h-20   placeholder:text-black text-lg md:text-2xl pl-8 ">
+      <button class="bg-green-600 h-12 md:h-20 w-[300px] md:w-[600px] md:text-4xl font-bold rounded-2xl text-white mt-5">Send Message</button>
+    </div>
+    </div>
+    </div>
+    <div class="bg-black w-full h-[100px] pt-3">
+    <div class="flex flex-row gap-1 justify-center items-center  text-white " >
+      <i class="bi bi-c-circle mt-[-8px] md:text-2xl"></i>
+      <h1 class="text-sm md:text-2xl">2024</h1>
+      <h1 class="text-sm md:text-2xl">SpiceCraft.</h1>
+      <h1 class="text-sm md:text-2xl">All rights deserved</h1>
+  </div>
+  <div class="flex justify-center text-green-400 gap-2 text-2xl" >
+      <i class="bi bi-facebook"></i>
+      <i class="bi bi-instagram"></i>
+      <i class="bi bi-twitter-x"></i>
+    </div>
+    </div>
+    </div>
+  </template>
+  
 
 <script>
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 export default {
-  data() {
+  name: 'RotatingImage',
+  data () {
     return {
-      tabs: ['About', 'Shop', 'Contact'],
-      activeTab: 0,
+      menuOpen: false,
     };
   },
   methods: {
-    setActiveTab(index) {
-      this.activeTab = index;
+    toggleMenu() {
+      this.menuOpen = !
+      this.menuOpen;
     },
   },
+  mounted() {
+    AOS.init();
+  }
 };
-
 </script>
 
-<style scoped>
-nav {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-@keyframes appear {
-  from{
-    opacity: 0;
-    clip-path: inset(100% 100% 0 0);
+<style>
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-  to{
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
+  to {
+    transform: rotate(360deg);
   }
 }
 
-.block {
-  animation: appear linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 40%;
+.animate-spin-custom {
+  animation: spin 3s linear infinite;
 }
+
 </style>
 
